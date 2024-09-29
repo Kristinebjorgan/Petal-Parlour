@@ -5,8 +5,27 @@
  * - `registerUser`: Handles user registration, creating a new user account.
  * - `handleLogout`: Logs out the user by clearing authentication tokens and redirecting.
  */
-import { loginUser, registerUser, handleLogout } from "./login.js";
-import { PostManager, PostRenderer } from "./post.js";
+import {
+  loginUser,
+  registerUser,
+  handleLogout,
+  sendApiRequest,
+  storeToken,
+  clearAuthData,
+} from "./login.js";
+
+import {
+  editPost,
+  deletePost,
+  displayPosts,
+  fetchPosts,
+  updatePost,
+  resetForm,
+  createPost,
+  fetchSinglePost,
+  displaySinglePost,
+  updateCharCount,
+} from "./post.js";
 
 /**
  * Event listener for forms
@@ -99,7 +118,7 @@ function initApp() {
   }
 
   if (checkForElement("addPostForm")) {
-    setupFormListener("addPostForm", PostManager.createPost); // Properly calling the createPost method
+    setupFormListener("addPostForm", createPost); // Properly calling the createPost method
   }
 
   if (checkForElement("loginForm")) {
@@ -108,7 +127,7 @@ function initApp() {
 
   // Fetch posts if the container exists
   if (checkForElement("postsContainer")) {
-    PostManager.fetchPosts();
+    fetchPosts();
   }
 
   // Insert "Load More" button
@@ -116,7 +135,7 @@ function initApp() {
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", () => {
       currentPage++; // Increment the page number
-      PostManager.fetchPosts(currentPage); // Fetch the next page of posts
+      fetchPosts(currentPage); // Fetch the next page of posts
     });
   }
   // Insert and handle Logout button
@@ -127,7 +146,7 @@ function initApp() {
   console.log("Post ID:", postId); // Debugging postId
 
   if (postId) {
-    PostManager.fetchSinglePost(postId);
+    fetchSinglePost(postId);
   }
 
   /**
@@ -140,7 +159,7 @@ function initApp() {
    */
   const textArea = document.getElementById("text");
   if (textArea) {
-    textArea.addEventListener("input", PostRenderer.updateCharCount);
+    textArea.addEventListener("input", updateCharCount);
   }
 }
 
@@ -164,5 +183,5 @@ document.addEventListener("DOMContentLoaded", initApp);
  * <button onclick="editPost(postId)">Edit</button>
  * <button onclick="deletePost(postId)">Delete</button>
  */
-window.editPost = PostManager.editPost;
-window.deletePost = PostManager.deletePost;
+window.editPost = editPost;
+window.deletePost = deletePost;

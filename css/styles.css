@@ -12086,6 +12086,27 @@ header.sticky-top i.fas.fa-plus {
   font-size: 1.25rem;
 }
 
+/* Custom styling for the Edit and Delete buttons */
+.custom-edit-btn {
+  background-color: #ffc107; /* Yellow color for Edit button */
+  border-color: #ffc107;
+}
+
+.custom-edit-btn:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+  border-color: #d39e00;
+}
+
+.custom-delete-btn:hover {
+  background-color: #c82333; /* Slightly darker red on hover */
+  border-color: #bd2130;
+}
+
+/* Optional: Add some space between buttons */
+.mr-2 {
+  margin-right: 10px;
+}
+
 #postsContainer {
   margin-bottom: 8rem;
 }

@@ -103,7 +103,7 @@ export function createPost(event) {
  * @example
  * resetForm(); // Resets the form and prepares it for new post creation.
  */
-function resetForm() {
+export function resetForm() {
   const form = document.getElementById("addPostForm");
   form.reset();
   document.getElementById("postId").value = "";
@@ -140,18 +140,18 @@ export function updatePost(event) {
     return;
   }
 
-  const image = document.getElementById("image").value;
-  const location = document.getElementById("location").value;
-  const text = document.getElementById("text").value;
-  const title = document.getElementById("title").value || "Untitled Post";
+  const image = document.getElementById("image").value || ""; 
+  const location = document.getElementById("location").value || ""; 
+  const text = document.getElementById("text").value || ""; 
+  const title = document.getElementById("title").value || "Untitled Post"; 
 
   const updatedPostData = {
     title: title,
     body: text || "No content provided.",
-    tags: ["petal-parlour", location || "Unknown"],
+    tags: ["petal-parlour", location || "Unknown"], 
     media: {
-      url: image || "/assets/default-post.png",
-      alt: title,
+      url: image || "/assets/default-post.png", 
+      alt: title, 
     },
   };
 
@@ -175,13 +175,12 @@ export function updatePost(event) {
     .then(() => {
       alert("Post updated successfully!");
       resetForm();
-      PostManager.fetchPosts();
+      fetchPosts(); // Refresh
     })
     .catch((error) => {
       alert("Post update failed: " + error.message);
     });
 }
-
 /**
  * Fetches posts from the API.
  *
@@ -220,7 +219,7 @@ export function fetchPosts(page = 1) {
       response.ok ? response.json() : Promise.reject(response)
     )
     .then((data) => {
-      displayPosts(data.data, page); // Pass current page to display
+      displayPosts(data.data, page); 
 
       // Disable the Load More button if it's the last page
       if (data.meta.isLastPage) {
@@ -253,7 +252,7 @@ export function displayPosts(posts, page) {
   if (page === 1) postsContainer.innerHTML = "";
 
   posts.forEach((post) => {
-    const location = post.tags?.[1] || "Unknown";
+    const location = post.tags?.[1] || "Unknown"; 
     const reactionsCount = post._count?.reactions || 0;
     const author = post.author?.name || "Anonymous";
     const imageUrl = post.media?.url || "/assets/default-image.png";
@@ -282,7 +281,44 @@ export function displayPosts(posts, page) {
         </div>
       </div>`;
 
-    // Attach click event to postElement
+    // Edit Button
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.classList.add("btn", "btn-warning", "mr-2");
+    editButton.addEventListener("click", (event) => {
+      event.stopPropagation(); 
+      editPost(
+        post.id,
+        post.title,
+        post.media, 
+        post.body,
+        location, 
+        post.created 
+      );
+    });
+
+    // Delete Button
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("btn", "btn-danger");
+    deleteButton.addEventListener("click", (event) => {
+      event.stopPropagation(); 
+      deletePost(post.id);
+    });
+
+    // Append the buttons 
+    postElement.appendChild(editButton);
+    postElement.appendChild(deleteButton);
+
+    //listener to postElement
+    postElement.addEventListener("click", () => {
+      window.location.href = `post.html?id=${post.id}`;
+    });
+
+    // Append the postElement
+    postsContainer.appendChild(postElement);
+
+    // Attach clickevent to post.html
     postElement.addEventListener("click", () => {
       window.location.href = `post.html?id=${post.id}`;
     });
@@ -290,6 +326,8 @@ export function displayPosts(posts, page) {
     postsContainer.appendChild(postElement);
   });
 }
+
+
 /**
  * Deletes a post by sending a DELETE.
  *
@@ -309,22 +347,31 @@ export function deletePost(postId) {
   const token = getToken();
   const apiKey = getApiKey();
 
-  fetch(`https://v2.api.noroff.dev/social/posts/${postId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "x-Noroff-api-key": apiKey,
-    },
+fetch(`https://v2.api.noroff.dev/social/posts/${postId}`, {
+  method: "DELETE",
+  headers: {
+    Authorization: `Bearer ${token}`,
+    "x-Noroff-api-key": apiKey,
+  },
+})
+  .then((response) => {
+    if (response.status === 204) {
+      alert("Post deleted successfully!");
+      fetchPosts();
+    } else if (response.status === 403) {
+      return response.json().then((data) => {
+        throw new Error(
+          data.message || "Forbidden: You don't have permission."
+        );
+      });
+    } else {
+      return response.json().then((data) => {
+        throw new Error(data.message || "Failed to delete post");
+      });
+    }
   })
-    .then((response) => {
-      if (response.status === 204) {
-        alert("Post deleted successfully!");
-        fetchPosts();
-      } else {
-        throw new Error("Failed to delete post");
-      }
-    })
-    .catch((error) => alert("Error deleting post: " + error.message));
+  .catch((error) => alert("Error deleting post: " + error.message));
+
 }
 
 /**
@@ -349,19 +396,20 @@ export function deletePost(postId) {
  * // Example usage: Populate form fields to edit the post
  * editPost('12345', 'New Post Title', 'https://example.com/image.jpg', 'Post content', 'New York', '2024-09-29');
  */
-export function editPost(postId, title, imageUrl, body, location, postDate) {
+export function editPost(postId, title, media, body, location, postDate) {
   const titleInput = document.getElementById("title");
   const imageInput = document.getElementById("image");
   const locationInput = document.getElementById("location");
   const textInput = document.getElementById("text");
   const postIdInput = document.getElementById("postId");
 
+  // Ensure fields are only filled with the data if they exist
   if (titleInput && imageInput && locationInput && textInput && postIdInput) {
-    titleInput.value = title;
-    imageInput.value = imageUrl || "";
-    locationInput.value = location || "Unknown";
-    textInput.value = body || "No content";
-    postIdInput.value = postId;
+    titleInput.value = title || ""; // Populate title if exists
+    imageInput.value = media?.url || ""; // Populate image URL if it exists, otherwise leave blank
+    locationInput.value = location || ""; // Populate location if it exists, otherwise leave blank
+    textInput.value = body || ""; // Populate body if exists
+    postIdInput.value = postId; // Set postId hidden field
 
     const submitButton = document.getElementById("submitButton");
     if (submitButton) {
@@ -379,18 +427,21 @@ export function editPost(postId, title, imageUrl, body, location, postDate) {
   }
 }
 
+
+
+
 /**
  * Fetches and displays a single post by ID
  *
  * This function sends a GET request to the API to retrieve a specific post,
- * It then passes the post data to `PostRenderer.displaySinglePost()` to render the post on the page.
+ * It then passes the post data to `displaySinglePost()` to render the post on the page.
  *
  * @param {string} postId - The ID of the post to fetch.
  *
  * This function performs the following actions:
  * - Validates if the token and API key before the API call.
  * - Makes a GET request to the API to fetch the post data.
- * - Successful: logs and passes the post data to `PostRenderer.displaySinglePost()`.
+ * - Successful: logs and passes the post data to `displaySinglePost()`.
  * - Errors: alert user.
  *
  * @example
@@ -422,7 +473,7 @@ export function fetchSinglePost(postId) {
       return response.json();
     })
     .then((postData) => {
-      PostRenderer.displaySinglePost(postData.data);
+    displaySinglePost(postData.data);
     })
     .catch((error) => {
       alert("Error fetching post details: " + error.message);

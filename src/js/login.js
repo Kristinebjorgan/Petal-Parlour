@@ -19,7 +19,7 @@
  *   .then(response => console.log(response))
  *   .catch(error => console.error('Error:', error.message));
  */
-async function sendApiRequest(url, method, body = {}) {
+export async function sendApiRequest(url, method, body = {}) {
   const response = await fetch(url, {
     method,
     headers: { "Content-Type": "application/json" },
@@ -43,7 +43,7 @@ async function sendApiRequest(url, method, body = {}) {
  * // Example usage:
  * storeToken("eyJhbGciOiJIUzI1NiIsInR5cCI...");
  */
-function storeToken(token) {
+export function storeToken(token) {
   if (token) {
     localStorage.setItem("jwtToken", token);
   }
@@ -58,7 +58,7 @@ function storeToken(token) {
  * // Example usage:
  * clearAuthData();  // This will log out the user by clearing stored tokens.
  */
-function clearAuthData() {
+export function clearAuthData() {
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("apiKey");
 }
