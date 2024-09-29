@@ -18,7 +18,6 @@ import { getToken, getApiKey } from "./config.js";
 let currentPage = 1;
 let isLastPage = false;
 
-
 /**
  * Creates a new post and sending a POST request.
  *
@@ -84,7 +83,7 @@ export function createPost(event) {
     .then(() => {
       alert("Post created successfully!");
       resetForm();
-      PostManager.fetchPosts();
+      fetchPosts();
     })
     .catch((error) => {
       alert("Post creation failed: " + error.message);
@@ -320,7 +319,7 @@ export function deletePost(postId) {
     .then((response) => {
       if (response.status === 204) {
         alert("Post deleted successfully!");
-        PostManager.fetchPosts();
+        fetchPosts();
       } else {
         throw new Error("Failed to delete post");
       }
