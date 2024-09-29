@@ -1,0 +1,76 @@
+/* login page */
+body .login-page {
+  font-family: "Playfair", serif !important;
+}
+
+.logo {
+  width: 100%;
+  background-color: transparent;
+  max-width: 500px;
+  height: auto; 
+  margin: 0 auto; 
+}
+
+#loginForm {
+  .btn-primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    margin: 1rem;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      border-color: darken($primary-color, 10%);
+    }
+  }
+
+  .btn-secondary {
+    background-color: $secondary-color;
+    border-color: $secondary-color;
+    color: $dark;
+
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+      border-color: darken($secondary-color, 10%);
+      color: $dark;
+    }
+  }
+}
+
+#loginForm .form-control {
+  &:focus {
+    border-color: $rose;
+    box-shadow: 0 0 0 0.2rem rgba($rose, 0.25);
+  }
+}
+
+/* Social icons */
+.social-login {
+  display: flex; 
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-btn {
+  width: 4em; 
+  height: 4em;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; 
+  color: $dark;
+  border: none;
+
+  .social-login {
+    color: $primary-color;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.custom-signup-link {
+  color: $dark;
+  text-decoration: none;
+  font-size: 1.1em;
+}

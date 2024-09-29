@@ -5,11 +5,26 @@
 @import "variables";
 
 // Import Bootstrap
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
 // Import global styles
 @import "global";
 
 // Import custom component styles
 @import "footer";
-@import "feed";
+
+//Import login form
+@import "form";
+
+//Import login page
+@import "login";
+
+//Import header
+@import "header";
+
+//import feed/index
+@import "index";
+
+//posts
+@import "posts";
+

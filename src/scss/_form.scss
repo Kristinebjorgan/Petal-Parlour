@@ -1,0 +1,49 @@
+.container {
+  background-color: $background-color;
+  padding: $spacer * 1;
+  border-radius: $border-radius;
+  box-shadow: 0 0 10px rgba($dark, 0.1);
+  padding-bottom: 6rem;
+}
+
+h2 {
+  color: $dark;
+  margin-bottom: $spacer * 1.5;
+  text-align: center;
+}
+
+.mt-3 {
+  text-align: center;
+
+  .btn-secondary {
+    margin-top: $spacer * 0.5;
+  }
+}
+
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  margin: 2rem;
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+  }
+}
+
+.btn-secondary {
+  background-color: $secondary-color;
+  border-color: $secondary-color;
+  color: $dark;
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+    border-color: darken($secondary-color, 10%);
+    color: $dark;
+  }
+}
+
+.form-control {
+  &:focus {
+    border-color: $rose;
+    box-shadow: 0 0 0 0.2rem rgba($rose, 0.25);
+  }
+}

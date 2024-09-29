@@ -1,10 +1,15 @@
+html,
 body {
-  background-color: $background-color; 
-  font-family: 'Playfair', serif;
-  color: $dark;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Playfair", serif !important;
+  background-color: $background-color;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: $dark;
+.divider {
+  height: 3rem; 
+  width: 100%;
+  background: transparent;
 }
-
