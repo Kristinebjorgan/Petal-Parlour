@@ -121,7 +121,6 @@ export async function registerUser(event) {
     window.location.href = "login.html";
   } catch (error) {
     alert("Registration failed: " + error.message);
-  }
 }
 
 /**
