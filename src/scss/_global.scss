@@ -1,0 +1,15 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Playfair", serif !important;
+  background-color: $background-color;
+}
+
+.divider {
+  height: 3rem; 
+  width: 100%;
+  background: transparent;
+}

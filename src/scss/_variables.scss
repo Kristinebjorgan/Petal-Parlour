@@ -1,0 +1,32 @@
+//primary colors
+$background-color: #fff8f1;
+$primary-color: #85727e;
+$secondary-color: #d7c6b5;
+$card-color: #fffdfb;
+
+// dark and light colors on primary-color
+$dark: darken($primary-color, 10%);
+$light: lighten($primary-color, 10%);
+$light-light: lighten($card-color, 10%);
+$dark-light: darken($card-color, 10%);
+
+$rose: #e0c3d4;
+
+//typography
+$font-family-base: "Playfair", serif;
+$font-size-base: 1rem;
+$font-weight-base: 400;
+$line-height-base: 1.5;
+$font-size-base: 1rem;
+
+//space & borders
+$spacer: 1rem;
+$border-radius: 0.25rem;
+
+//div
+$facebook-color: #1877f2;
+$google-color: #ea4335;
+
+//links
+$link-decoration: none;
+$link-hover-decoration: none;

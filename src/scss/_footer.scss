@@ -1,0 +1,36 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: $primary-color;
+
+  .navbar {
+    background-color: $primary-color;
+    padding: clamp(0rem, 1vw, 1rem) 0;
+
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          color: $secondary-color;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: background-color 0.3s ease;
+          aspect-ratio: 1 / 1;
+
+          &:hover {
+            background-color: $dark;
+            border-radius: 50%;
+          }
+
+          .icon {
+            width: clamp(3em, 8vw, 6em);
+            height: clamp(3em, 8vw, 6em);
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
+}

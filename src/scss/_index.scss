@@ -1,0 +1,90 @@
+.card {
+  border-style: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  padding: 1em;
+  border-radius: 10px;
+  background-color: $light-light;
+
+  .card-img-top {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease; 
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+
+  .card-body {
+    .card-text {
+      color: $primary-color;
+      font-size: 0.75em;
+
+      i {
+        margin-right: 0.5em;
+        color: $primary-color;
+        vertical-align: middle;
+      }
+    }
+
+    .mb-0 {
+      font-size: 1em;
+    }
+
+    .d-flex {
+      justify-content: space-between;
+      align-items: center;
+
+      .card-text {
+        display: flex;
+        align-items: center;
+        font-size: 1em;
+
+        i {
+          margin-right: 0.3em;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    /* buttons */
+    .btn-sm {
+      color: $primary-color;
+      border: none;
+
+      &:hover {
+        color: $primary-color;
+        background-color: transparent;
+      }
+
+      i {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+/* Custom styling for the Edit and Delete buttons */
+.custom-edit-btn {
+  background-color: #ffc107; /* Yellow color for Edit button */
+  border-color: #ffc107;
+}
+
+.custom-edit-btn:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+  border-color: #d39e00;
+}
+
+.custom-delete-btn:hover {
+  background-color: #c82333; /* Slightly darker red on hover */
+  border-color: #bd2130;
+}
+
+/* Optional: Add some space between buttons */
+.mr-2 {
+  margin-right: 10px;
+}
