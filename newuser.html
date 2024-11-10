@@ -3,66 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register - Petal Parlour</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <title>Feed</title>
+    <link rel="stylesheet" href="src/css/output.css" />
+    <link rel="stylesheet" href="src/css/global.css" />
+    <script type="module" defer src="/src/js/main.js"></script>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap"
-      rel="stylesheet"
-    />
-<script type="module" defer src="/src/js/main.js"></script>
   </head>
-  <body>
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div id="register-form">
-            <h2>Register</h2>
-            <form id="registerForm">
-              <div class="mb-3">
-                <label for="registerName" class="form-label">Name:</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="registerName"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="registerEmail" class="form-label">Email:</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="registerEmail"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="registerPassword" class="form-label"
-                  >Password:</label
-                >
-                <input
-                  type="password"
-                  class="form-control"
-                  id="registerPassword"
-                  required
-                />
-              </div>
-              <div class="mb-3"></div>
-              <button type="submit" class="btn btn-primary">Register</button>
-            </form>
-
-            <div class="mt-3">
-              <p>
-                Already have an account?
-                <a href="login.html" class="btn btn-secondary">Login here</a>
-              </p>
-            </div>
-          </div>
+<body class="bg-background-color font-base">
+    <div
+      class="container mx-auto mt-5 p-4 bg-background-color rounded shadow-md"
+    >
+      <h2 class="text-dark text-center mb-6">Register</h2>
+      <form id="registerForm">
+        <div class="mb-4">
+          <label for="registerName" class="block text-gray-700">Name:</label>
+          <input
+            type="text"
+            id="registerName"
+            class="border border-gray-300 rounded w-full px-3 py-2 focus:border-rose-400 focus:ring-2 focus:ring-rose-200"
+            required
+          />
         </div>
+        <div class="mb-4">
+          <label for="registerEmail" class="block text-gray-700">Email:</label>
+          <input
+            type="email"
+            id="registerEmail"
+            class="border border-gray-300 rounded w-full px-3 py-2 focus:border-rose-400 focus:ring-2 focus:ring-rose-200"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="registerPassword" class="block text-gray-700"
+            >Password:</label
+          >
+          <input
+            type="password"
+            id="registerPassword"
+            class="border border-gray-300 rounded w-full px-3 py-2 focus:border-rose-400 focus:ring-2 focus:ring-rose-200"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-primary-color text-white px-4 py-2 rounded hover:bg-dark transition duration-300"
+        >
+          Register
+        </button>
+      </form>
+      <div class="mt-3 text-center">
+        <p>
+          Already have an account?
+          <a href="login.html" class="text-secondary-color hover:text-dark"
+            >Login here</a
+          >
+        </p>
       </div>
     </div>
   </body>

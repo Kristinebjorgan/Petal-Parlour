@@ -4,9 +4,9 @@
   "description": "A social media platform for sharing flowers and stories.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "live-server src --entry-file=index.html",
-    "build-css": "sass src/scss/styles.scss src/css/styles.css --watch"
+    "start": "live-server --entry-file=index.html",
+    "build:tailwind": "npx tailwindcss -i src/css/tailwind.css -o src/css/output.css",
+    "dev": "npx tailwindcss -i src/css/tailwind.css -o src/css/output.css --watch"
   },
   "keywords": [
     "flowers",
@@ -25,8 +25,10 @@
   },
   "homepage": "https://github.com/your-username/Petal-Parlour#readme",
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "live-server": "^1.2.1",
-    "sass": "^1.77.6"
+    "sass": "^1.77.6",
+    "tailwindcss": "^3.4.14"
   },
   "dependencies": {
     "bootstrap": "^5.3.3"

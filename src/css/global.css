@@ -1,0 +1,22 @@
+
+/* box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Set minimum height for html and body to enable full viewport height */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Divider component */
+.divider {
+  height: 3rem;
+  width: 100%;
+  background: transparent;
+}

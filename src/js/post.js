@@ -140,18 +140,18 @@ export function updatePost(event) {
     return;
   }
 
-  const image = document.getElementById("image").value || ""; 
-  const location = document.getElementById("location").value || ""; 
-  const text = document.getElementById("text").value || ""; 
-  const title = document.getElementById("title").value || "Untitled Post"; 
+  const image = document.getElementById("image").value || "";
+  const location = document.getElementById("location").value || "";
+  const text = document.getElementById("text").value || "";
+  const title = document.getElementById("title").value || "Untitled Post";
 
   const updatedPostData = {
     title: title,
     body: text || "No content provided.",
-    tags: ["petal-parlour", location || "Unknown"], 
+    tags: ["petal-parlour", location || "Unknown"],
     media: {
-      url: image || "/assets/default-post.png", 
-      alt: title, 
+      url: image || "/assets/default-post.png",
+      alt: title,
     },
   };
 
@@ -219,7 +219,7 @@ export function fetchPosts(page = 1) {
       response.ok ? response.json() : Promise.reject(response)
     )
     .then((data) => {
-      displayPosts(data.data, page); 
+      displayPosts(data.data, page);
 
       // Disable the Load More button if it's the last page
       if (data.meta.isLastPage) {
@@ -243,90 +243,126 @@ export function fetchPosts(page = 1) {
  *
  * @example
  * // Display posts for page 1
- * displayPosts(posts, 1);
  */
 export function displayPosts(posts, page) {
   const postsContainer = document.getElementById("postsContainer");
   if (!postsContainer) return;
 
-  if (page === 1) postsContainer.innerHTML = "";
+  if (page === 1) postsContainer.innerHTML = ""; // Clear container for page 1
 
   posts.forEach((post) => {
-    const location = post.tags?.[1] || "Unknown"; 
+    // Extract post data
+    const location = post.tags?.[1] || "Unknown";
     const reactionsCount = post._count?.reactions || 0;
     const author = post.author?.name || "Anonymous";
     const imageUrl = post.media?.url || "/assets/default-image.png";
     const postDate = new Date(post.created).toLocaleDateString();
 
+    // Create main post element
     const postElement = document.createElement("div");
-    postElement.classList.add("post", "mb-4", "p-3", "border", "rounded");
+    postElement.classList.add(
+      "bg-light-light",
+      "shadow-md",
+      "p-4",
+      "rounded-lg",
+      "hover:shadow-lg",
+      "transition",
+      "duration-300",
+      "mb-6"
+    );
+
+    // Inner HTML structure with Tailwind classes
     postElement.innerHTML = `
       <div class="post-inner">
-        <div class="post-content">
-          <div class="post-image-container mb-3">
-            <img src="${imageUrl}" alt="${post.media?.alt || "Post Image"}"
-              class="post-image img-fluid rounded" 
-              onerror="this.onerror=null;this.src='/assets/default-image.png';">
-          </div>
-          <div class="post-meta d-flex justify-content-between text-muted mb-3">
-            <span><i class="fas fa-map-marker-alt"></i> ${location}</span>
-            <span><i class="fas fa-calendar-alt"></i> Posted on: ${postDate}</span>
-            <span><i class="fas fa-heart"></i> ${reactionsCount}</span>
-          </div>
-          <div class="post-body">
-            <h4 class="post-link">${post.title || "Untitled Post"}</h4>
-            <p>${post.body || "No content"}</p>
-          </div>
-          <div class="author-details text-muted"><p>${author}</p></div>
+        <!-- Post Image -->
+        <div class="post-image-container mb-3">
+          <img src="${imageUrl}" alt="${post.media?.alt || "Post Image"}"
+            class="rounded-md shadow-md transition-transform duration-300 hover:scale-105 w-full h-48 object-cover" 
+            onerror="this.onerror=null;this.src='/assets/default-image.png';">
+        </div>
+        
+        <!-- Post Metadata -->
+        <div class="flex justify-between text-gray-500 text-sm mb-3">
+          <span class="flex items-center"><i class="fas fa-map-marker-alt mr-1"></i> ${location}</span>
+          <span class="flex items-center"><i class="fas fa-calendar-alt mr-1"></i> Posted on: ${postDate}</span>
+          <span class="flex items-center"><i class="fas fa-heart mr-1"></i> ${reactionsCount}</span>
+        </div>
+
+        <!-- Post Content -->
+        <div class="post-body">
+          <h4 class="text-lg font-semibold text-primary-color mb-2">${
+            post.title || "Untitled Post"
+          }</h4>
+          <p class="text-gray-700">${post.body || "No content"}</p>
+        </div>
+
+        <!-- Author Details -->
+        <div class="text-gray-500 text-sm mt-2">
+          <p>by ${author}</p>
         </div>
       </div>`;
 
     // Edit Button
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
-    editButton.classList.add("btn", "btn-warning", "mr-2");
+    editButton.classList.add(
+      "bg-yellow-400",
+      "text-white",
+      "px-3",
+      "py-1",
+      "rounded",
+      "hover:bg-yellow-500",
+      "transition",
+      "duration-300",
+      "mr-2"
+    );
     editButton.addEventListener("click", (event) => {
-      event.stopPropagation(); 
+      event.stopPropagation();
       editPost(
         post.id,
         post.title,
-        post.media, 
+        post.media,
         post.body,
-        location, 
-        post.created 
+        location,
+        post.created
       );
     });
 
     // Delete Button
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
-    deleteButton.classList.add("btn", "btn-danger");
+    deleteButton.classList.add(
+      "bg-red-500",
+      "text-white",
+      "px-3",
+      "py-1",
+      "rounded",
+      "hover:bg-red-600",
+      "transition",
+      "duration-300"
+    );
     deleteButton.addEventListener("click", (event) => {
-      event.stopPropagation(); 
+      event.stopPropagation();
       deletePost(post.id);
     });
 
-    // Append the buttons 
-    postElement.appendChild(editButton);
-    postElement.appendChild(deleteButton);
+    // Append buttons to the post element
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("flex", "space-x-2", "mt-4");
+    buttonContainer.appendChild(editButton);
+    buttonContainer.appendChild(deleteButton);
 
-    //listener to postElement
+    postElement.appendChild(buttonContainer);
+
+    // Add click listener for navigating to `post.html`
     postElement.addEventListener("click", () => {
       window.location.href = `post.html?id=${post.id}`;
     });
 
-    // Append the postElement
-    postsContainer.appendChild(postElement);
-
-    // Attach clickevent to post.html
-    postElement.addEventListener("click", () => {
-      window.location.href = `post.html?id=${post.id}`;
-    });
-
+    // Append the complete post element to the container
     postsContainer.appendChild(postElement);
   });
 }
-
 
 /**
  * Deletes a post by sending a DELETE.
@@ -347,31 +383,30 @@ export function deletePost(postId) {
   const token = getToken();
   const apiKey = getApiKey();
 
-fetch(`https://v2.api.noroff.dev/social/posts/${postId}`, {
-  method: "DELETE",
-  headers: {
-    Authorization: `Bearer ${token}`,
-    "x-Noroff-api-key": apiKey,
-  },
-})
-  .then((response) => {
-    if (response.status === 204) {
-      alert("Post deleted successfully!");
-      fetchPosts();
-    } else if (response.status === 403) {
-      return response.json().then((data) => {
-        throw new Error(
-          data.message || "Forbidden: You don't have permission."
-        );
-      });
-    } else {
-      return response.json().then((data) => {
-        throw new Error(data.message || "Failed to delete post");
-      });
-    }
+  fetch(`https://v2.api.noroff.dev/social/posts/${postId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "x-Noroff-api-key": apiKey,
+    },
   })
-  .catch((error) => alert("Error deleting post: " + error.message));
-
+    .then((response) => {
+      if (response.status === 204) {
+        alert("Post deleted successfully!");
+        fetchPosts();
+      } else if (response.status === 403) {
+        return response.json().then((data) => {
+          throw new Error(
+            data.message || "Forbidden: You don't have permission."
+          );
+        });
+      } else {
+        return response.json().then((data) => {
+          throw new Error(data.message || "Failed to delete post");
+        });
+      }
+    })
+    .catch((error) => alert("Error deleting post: " + error.message));
 }
 
 /**
@@ -427,9 +462,6 @@ export function editPost(postId, title, media, body, location, postDate) {
   }
 }
 
-
-
-
 /**
  * Fetches and displays a single post by ID
  *
@@ -473,7 +505,7 @@ export function fetchSinglePost(postId) {
       return response.json();
     })
     .then((postData) => {
-    displaySinglePost(postData.data);
+      displaySinglePost(postData.data);
     })
     .catch((error) => {
       alert("Error fetching post details: " + error.message);

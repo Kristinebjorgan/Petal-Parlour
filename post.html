@@ -3,56 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>Feed</title>
+    <link rel="stylesheet" href="src/css/output.css" />
+    <link rel="stylesheet" href="src/css/global.css" />
+    <script type="module" defer src="/src/js/main.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-
-    <link rel="stylesheet" href="css/styles.css" />
-<script type="module" defer src="/src/js/main.js"></script>
   </head>
   <body>
     <!-- Main content -->
-
-    <div class="container">
-      <a id="backToPosts" href="index.html">← Back to all posts</a>
-      <div id="singlePostContainer">
+    <div
+      class="container mx-auto mt-8 p-4 bg-background-color rounded shadow-md"
+    >
+      <a
+        id="backToPosts"
+        href="index.html"
+        class="text-primary-color hover:underline block mb-4"
+      >
+        ← Back to all posts
+      </a>
+      <div
+        id="singlePostContainer"
+        class="bg-light-light p-6 rounded-lg shadow-lg"
+      >
         <div id="postDetails"></div>
       </div>
     </div>
 
-    <!-- Footer nav -->
-    <footer class="footer">
-      <nav class="navbar navbar-expand fixed-bottom custom-footer">
-        <div class="container-fluid justify-content-center">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#" id="profile-icon">
-                <img
-                  src="assets/icons/profile.png"
-                  alt="Profile"
-                  class="icon"
-                />
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" id="feed-icon">
-                <img src="assets/icons/feed.png" alt="Feed" class="icon" />
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link globe-icon" href="#" id="globe-icon">
-                <img src="assets/icons/globemap.png" alt="Globe" class="icon" />
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" id="book-icon">
-                <img src="assets/icons/ency.png" alt="Book" class="icon" />
-              </a>
-            </li>
-          </ul>
-        </div>
+    <!-- Footer nav tailwind -->
+    <footer class="sticky bottom-0 w-full z-10 bg-primary-color">
+      <nav class="bg-primary-color py-2 flex justify-center">
+        <ul class="flex space-x-4">
+          <li>
+            <a
+              href="#"
+              id="profile-icon"
+              class="flex justify-center items-center text-secondary-color transition duration-300 aspect-w-1 aspect-h-1 hover:bg-dark hover:rounded-full"
+            >
+              <img
+                src="assets/icons/profile.png"
+                alt="Profile"
+                class="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              id="feed-icon"
+              class="flex justify-center items-center text-secondary-color transition duration-300 aspect-w-1 aspect-h-1 hover:bg-dark hover:rounded-full"
+            >
+              <img
+                src="assets/icons/feed.png"
+                alt="Feed"
+                class="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              id="globe-icon"
+              class="flex justify-center items-center text-secondary-color transition duration-300 aspect-w-1 aspect-h-1 hover:bg-dark hover:rounded-full"
+            >
+              <img
+                src="assets/icons/globemap.png"
+                alt="Globe"
+                class="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              id="book-icon"
+              class="flex justify-center items-center text-secondary-color transition duration-300 aspect-w-1 aspect-h-1 hover:bg-dark hover:rounded-full"
+            >
+              <img
+                src="assets/icons/ency.png"
+                alt="Book"
+                class="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+              />
+            </a>
+          </li>
+        </ul>
       </nav>
     </footer>
   </body>
